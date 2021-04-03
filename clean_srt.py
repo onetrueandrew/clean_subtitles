@@ -1,6 +1,7 @@
 import os
 import sys
 import re
+import glob
 
 SUPPORTED_MEDIA = ['srt']
 SEPARATOR = ','
@@ -15,7 +16,7 @@ def read_file(_file_path):
     :param _file_path: path to a certain file
     :return: opened file
     """
-    with open(_file_path, 'r', encoding='utf8') as _file_to_read:
+    with open(_file_path, 'r', encoding='ISO-8859-1') as _file_to_read:
         _file = _file_to_read.read()
     return _file
 
@@ -63,10 +64,9 @@ def clean_folder_of_srt(_file_path, _ads_to_remove):
     :void: calls the remove_ads_from_srt() for each supported file
     """
     _directory_path = os.path.dirname(_file_path)
-    for filename in os.listdir(_directory_path):
+    for filename in glob.glob(_file_path + '/**/*.srt', recursive=True):
         if filename[-3:].lower() in SUPPORTED_MEDIA:
-            remove_ads_from_srt(f'{_directory_path}/{filename}', _ads_to_remove)
-
+            remove_ads_from_srt(filename, _ads_to_remove)
 
 def clean_selected_files():
     """
