@@ -16,7 +16,7 @@ def read_file(_file_path):
     :param _file_path: path to a certain file
     :return: opened file
     """
-    with open(_file_path, 'r', encoding='ISO-8859-1') as _file_to_read:
+    with open(_file_path, 'r', encoding='utf-8') as _file_to_read:
         _file = _file_to_read.read()
     return _file
 
